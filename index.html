@@ -1,18 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>For Hareem ❤️</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>For Hareem ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Comic Sans MS', cursive;
+  background: url("background.jpg") no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+  text-align: center;
+}
+
+.container {
+  background: rgba(0,0,0,0.65);
+  padding: 30px;
+  margin: 40px auto;
+  width: 85%;
+  max-width: 600px;
+  border-radius: 20px;
+}
+
+.hidden { display: none; }
+
+.buttons button, button {
+  padding: 14px 26px;
+  font-size: 18px;
+  margin: 10px;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+}
+
+#yesBtn {
+  background-color: #ff5fa2;
+  color: white;
+}
+
+#noBtn {
+  background-color: #777;
+  color: white;
+}
+
+.gif {
+  width: 220px;
+  margin: 20px 0;
+}
+
+.letter {
+  font-size: 18px;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.gallery img {
+  width: 100%;
+  border-radius: 15px;
+}
+</style>
 </head>
+
 <body>
 
-<!-- Background Music (starts on first click) -->
+<!-- MUSIC -->
 <audio id="bgMusic" loop>
   <source src="song.mp3" type="audio/mpeg">
 </audio>
 
-<!-- QUESTION SCREEN -->
+<!-- QUESTION -->
 <div class="container" id="questionScreen">
   <h1>Will you be my Valentine, Hareem? 💖</h1>
   <img id="gif" src="angry1.gif" class="gif">
@@ -25,7 +88,7 @@
   <p id="message"></p>
 </div>
 
-<!-- YAY SCREEN -->
+<!-- YAY -->
 <div class="container hidden" id="yayScreen">
   <h1>YAYYYY!!! 🥰💘</h1>
   <img src="happy.gif" class="gif">
@@ -36,7 +99,7 @@
   </div>
 </div>
 
-<!-- LETTER SCREEN -->
+<!-- LETTER -->
 <div class="container hidden" id="letterScreen">
   <h1>My Letter To You 💖</h1>
 
@@ -46,31 +109,24 @@
     My love, my Hareem, my wifey ❤️<br><br>
 
     I don’t even know where to start, because no amount of words could ever fully explain
-    what you mean to me. You are not just someone I love — you are my safe place,
-    my happiness, my calm in chaos, and my biggest blessing.<br><br>
+    what you mean to me. You are my safe place, my happiness, and my biggest blessing.<br><br>
 
-    Every time I talk to you, every time I think about you, my heart feels lighter.
-    You have this beautiful way of making even the simplest moments feel special.
-    Your smile, your laugh, your presence — they all mean more to me than you’ll ever know.<br><br>
-
-    Hareem, you make my world brighter without even trying.
-    You motivate me, support me, and believe in me in ways no one else ever has.
-    With you, love feels easy, real, and pure.
-    You make me want to be better, not just for myself, but for us.<br><br>
+    You make my world brighter without even trying.
+    You motivate me, support me, and make love feel easy and real.
+    With you, everything feels right.<br><br>
 
     I promise to always choose you.
-    To stand by you, to protect your heart, to respect you, and to love you in every way possible.
-    Through every high and every low, I want you right next to me — my wifey, my forever,
-    my person. 💍❤️<br><br>
+    Through every high and low, I want you by my side —
+    my wifey, my forever, my person. 💍❤️<br><br>
 
     Happy Valentine’s Day, my love.
     Today, tomorrow, and always — my heart is yours. 💕🌹
   </p>
 
-  <button onclick="goBackToYay()">⬅ Back</button>
+  <button onclick="goBack()">⬅ Back</button>
 </div>
 
-<!-- MEMORY LANE -->
+<!-- MEMORY -->
 <div class="container hidden" id="memoryScreen">
   <h1>Our Memory Lane 📸❤️</h1>
 
@@ -83,9 +139,65 @@
     <img src="6.jpg">
   </div>
 
-  <button onclick="goBackToYay()">⬅ Back</button>
+  <button onclick="goBack()">⬅ Back</button>
 </div>
 
-<script src="script.js"></script>
+<script>
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const message = document.getElementById("message");
+const gif = document.getElementById("gif");
+const bgMusic = document.getElementById("bgMusic");
+
+let noCount = 0;
+let musicStarted = false;
+
+function startMusic() {
+  if (!musicStarted) {
+    bgMusic.play().catch(()=>{});
+    musicStarted = true;
+  }
+}
+
+noBtn.onclick = () => {
+  startMusic();
+  noCount++;
+
+  message.innerText = "Think again 😏";
+  yesBtn.style.transform = `scale(${1 + noCount * 0.3})`;
+
+  if (noCount === 1) gif.src = "angry1.gif";
+  if (noCount === 2) gif.src = "angry2.gif";
+  if (noCount === 3) gif.src = "angry3.gif";
+
+  if (noCount >= 3) {
+    noBtn.style.display = "none";
+    message.innerText = "You only have one choice now 😌❤️";
+  }
+};
+
+yesBtn.onclick = () => {
+  startMusic();
+  document.getElementById("questionScreen").classList.add("hidden");
+  document.getElementById("yayScreen").classList.remove("hidden");
+};
+
+function showLetter() {
+  document.getElementById("yayScreen").classList.add("hidden");
+  document.getElementById("letterScreen").classList.remove("hidden");
+}
+
+function showMemories() {
+  document.getElementById("yayScreen").classList.add("hidden");
+  document.getElementById("memoryScreen").classList.remove("hidden");
+}
+
+function goBack() {
+  document.getElementById("letterScreen").classList.add("hidden");
+  document.getElementById("memoryScreen").classList.add("hidden");
+  document.getElementById("yayScreen").classList.remove("hidden");
+}
+</script>
+
 </body>
 </html>
