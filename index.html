@@ -2,15 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>For Haleema ❤️</title>
+  <title>For Hareem ❤️</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<audio autoplay loop>
+<!-- Background Music (starts on first click) -->
+<audio id="bgMusic" loop>
   <source src="song.mp3" type="audio/mpeg">
 </audio>
 
+<!-- QUESTION SCREEN -->
 <div class="container" id="questionScreen">
   <h1>Will you be my Valentine, Hareem? 💖</h1>
   <img id="gif" src="angry1.gif" class="gif">
@@ -23,8 +25,9 @@
   <p id="message"></p>
 </div>
 
+<!-- YAY SCREEN -->
 <div class="container hidden" id="yayScreen">
-  <h1>YAYYY!!! 🥰💘</h1>
+  <h1>YAYYYY!!! 🥰💘</h1>
   <img src="happy.gif" class="gif">
 
   <div class="buttons">
@@ -33,8 +36,10 @@
   </div>
 </div>
 
+<!-- LETTER SCREEN -->
 <div class="container hidden" id="letterScreen">
   <h1>My Letter To You 💖</h1>
+
   <p class="letter">
     Dear Hareem,<br><br>
 
@@ -58,18 +63,17 @@
     Through every high and every low, I want you right next to me — my wifey, my forever,
     my person. 💍❤️<br><br>
 
-    Thank you for being you.
-    Thank you for loving me the way you do.
-    Thank you for existing, because my life truly feels incomplete without you in it.<br><br>
-
     Happy Valentine’s Day, my love.
     Today, tomorrow, and always — my heart is yours. 💕🌹
   </p>
+
+  <button onclick="goBackToYay()">⬅ Back</button>
 </div>
 
-
+<!-- MEMORY LANE -->
 <div class="container hidden" id="memoryScreen">
   <h1>Our Memory Lane 📸❤️</h1>
+
   <div class="gallery">
     <img src="1.jpg">
     <img src="2.jpg">
@@ -78,6 +82,8 @@
     <img src="5.jpg">
     <img src="6.jpg">
   </div>
+
+  <button onclick="goBackToYay()">⬅ Back</button>
 </div>
 
 <script src="script.js"></script>
